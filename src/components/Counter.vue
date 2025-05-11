@@ -1,21 +1,36 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, nextTick } from 'vue';
 
-console.info(`Load Counter component`);
-let count = ref(0);
+const props = defineProps(["name", "initialCount"]);
 
-function increment(){
+console.log(`Load Counter component`);
+let counter = ref({
+    count: 0,
+    name: "Syahrul"
+});
+
+async function increment(){
   
-    console.info(`Incrementing count: ${count.value}`);
-    count.value++;
+    console.info(`Incrementing count: ${counter.value.count}`);
+    counter.value = {
+        name: counter.value.name,
+        count: counter.value.count + 1
+    };
 
-    document.getElementById('count').innerText = `Counter : ${count.value}`;
+    await nextTick();
+    counter.value.count++;
+    await nextTick();
+    counter.value.count++;
+    await nextTick();
+
+    console.log("Incremented count after nextTick ");
+    
   }
 </script>
 
 <template>
     <div>
-        <h1 id="count"> Counter : {{ count }}</h1>
+        <h1 id="count"> Counter {{ props.name }} : {{ counter.count }}</h1>
         <button v-on:click="increment">Increment</button>
     </div>
 </template>
