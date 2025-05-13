@@ -11,7 +11,9 @@ export default defineConfig({
         hello: 'hello.html',
         counter: 'counter.html',
         product: 'product.html',
+        contact: 'contact.html',
         note: 'note.html',
+        button: 'button.html',
       }
     }
   }
